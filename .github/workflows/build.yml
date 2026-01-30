@@ -42,10 +42,10 @@ jobs:
         run: |
           IMAGE_TAG=${GITHUB_SHA::8}
           docker build -t simple-nodejs-app:$IMAGE_TAG .
-          docker tag simple-nodejs-app:$IMAGE_TAG ${{ steps.login-ecr.outputs.registry }}/simple-nodejs-app:$IMAGE_TAG
-          docker tag simple-nodejs-app:$IMAGE_TAG ${{ steps.login-ecr.outputs.registry }}/simple-nodejs-app:latest
-          docker push ${{ steps.login-ecr.outputs.registry }}/simple-nodejs-app:$IMAGE_TAG
-          docker push ${{ steps.login-ecr.outputs.registry }}/simple-nodejs-app:latest
+          docker tag simple-nodejs-app:$IMAGE_TAG ${{ steps.login-ecr.outputs.registry }}/crud-app:$IMAGE_TAG
+          docker tag simple-nodejs-app:$IMAGE_TAG ${{ steps.login-ecr.outputs.registry }}/crud-app:latest
+          docker push ${{ steps.login-ecr.outputs.registry }}/crud-app:$IMAGE_TAG
+          docker push ${{ steps.login-ecr.outputs.registry }}/crud-app:latest
 
       # 6. Register new ECS task definition revision
       - name: Register ECS Task Definition
