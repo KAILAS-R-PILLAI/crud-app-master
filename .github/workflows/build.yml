@@ -51,7 +51,7 @@ jobs:
       - name: Register ECS Task Definition
         run: |
           IMAGE_TAG=${GITHUB_SHA::8}
-          TASK_DEF_JSON=$(aws ecs describe-task-definition --task-definition simple-nodejs-app)
+          TASK_DEF_JSON=$(aws ecs describe-task-definition --task-definition crud-app-task)
           NEW_TASK_DEF=$(echo $TASK_DEF_JSON | jq 'del(.taskDefinition.taskDefinitionArn, .taskDefinition.revision, .taskDefinition.status, .taskDefinition.requiresAttributes, .taskDefinition.compatibilities, .taskDefinition.registeredAt, .taskDefinition.registeredBy)')
           NEW_TASK_DEF=$(echo $NEW_TASK_DEF | jq --arg IMAGE "${{ steps.login-ecr.outputs.registry }}/simple-nodejs-app:$IMAGE_TAG" '.taskDefinition.containerDefinitions[0].image=$IMAGE')
           echo $NEW_TASK_DEF | jq '.taskDefinition' > new-task-def.json
